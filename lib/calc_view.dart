@@ -1,4 +1,5 @@
 import 'package:basic_calculator_1/calc_controller.dart';
+import 'package:basic_calculator_1/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,110 +10,148 @@ class CalculatorView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Calculator'),
+        title: const Text(
+          'Hello Calculator!',
+        ),
       ),
-      body: Column(children: [
-        Center(
+      body: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+        Expanded(
           child: BlocBuilder<CalculatorController, List<String>>(
-              builder: (context, state) => Center(child: Text(state.join()))),
+              builder: (context, state) => Text(
+                    state.join(),
+                    style: Theme.of(context).textTheme.displayLarge,
+                    textAlign: TextAlign.right,
+                    // textDirection: TextDirection.ltr,
+                  )),
         ),
-        Row(children: [
-          ElevatedButton(
-              onPressed: () => context.read<CalculatorController>().clear(),
-              child: const Text('C')),
-          ElevatedButton(
-              onPressed: () =>
+        const SizedBox(height: 16),
+        ButtonRow(
+          children: [
+            CustomButton(
+              onTap: () => context.read<CalculatorController>().clear(),
+              buttonText: 'C',
+              customStyle: delButtonStyle,
+            ),
+            CustomButton(
+              onTap: () =>
                   context.read<CalculatorController>().addOpeningParenthesis(),
-              child: const Text('(')),
-          ElevatedButton(
-              onPressed: () =>
+              buttonText: ('('),
+              customStyle: operatorButtonStyle,
+            ),
+            CustomButton(
+              onTap: () =>
                   context.read<CalculatorController>().addClosingParenthesis(),
-              child: const Text(')')),
-          ElevatedButton(
-              onPressed: () => context.read<CalculatorController>().divide(),
-              child: const Text('/')),
-        ]),
-        Row(
-          children: [
-            ElevatedButton(
-                onPressed: () =>
-                    context.read<CalculatorController>().addNumber('7'),
-                child: const Text('7')),
-            ElevatedButton(
-                onPressed: () =>
-                    context.read<CalculatorController>().addNumber('8'),
-                child: const Text('8')),
-            ElevatedButton(
-                onPressed: () =>
-                    context.read<CalculatorController>().addNumber('9'),
-                child: const Text('9')),
-            ElevatedButton(
-                onPressed: () =>
-                    context.read<CalculatorController>().multiply(),
-                child: const Text('X')),
+              buttonText: (')'),
+              customStyle: operatorButtonStyle,
+            ),
+            CustomButton(
+              onTap: () => context.read<CalculatorController>().divide(),
+              buttonText: ('/'),
+              customStyle: operatorButtonStyle,
+            ),
           ],
         ),
-        Row(
+        ButtonRow(
           children: [
-            ElevatedButton(
-                onPressed: () =>
-                    context.read<CalculatorController>().addNumber('4'),
-                child: const Text('4')),
-            ElevatedButton(
-                onPressed: () =>
-                    context.read<CalculatorController>().addNumber('5'),
-                child: const Text('5')),
-            ElevatedButton(
-                onPressed: () =>
-                    context.read<CalculatorController>().addNumber('6'),
-                child: const Text('6')),
-            ElevatedButton(
-                onPressed: () =>
-                    context.read<CalculatorController>().subtract(),
-                child: const Text('-')),
+            CustomButton(
+              onTap: () => context.read<CalculatorController>().addNumber('7'),
+              buttonText: ('7'),
+            ),
+            CustomButton(
+              onTap: () => context.read<CalculatorController>().addNumber('8'),
+              buttonText: ('8'),
+            ),
+            CustomButton(
+              onTap: () => context.read<CalculatorController>().addNumber('9'),
+              buttonText: ('9'),
+            ),
+            CustomButton(
+              onTap: () => context.read<CalculatorController>().multiply(),
+              buttonText: ('X'),
+              customStyle: operatorButtonStyle,
+            ),
           ],
         ),
-        Row(
+        ButtonRow(
           children: [
-            ElevatedButton(
-                onPressed: () =>
-                    context.read<CalculatorController>().addNumber('1'),
-                child: const Text('1')),
-            ElevatedButton(
-                onPressed: () =>
-                    context.read<CalculatorController>().addNumber('2'),
-                child: const Text('2')),
-            ElevatedButton(
-                onPressed: () =>
-                    context.read<CalculatorController>().addNumber('3'),
-                child: const Text('3')),
-            ElevatedButton(
-                onPressed: () =>
-                    context.read<CalculatorController>().add(),
-                child: const Text('+')),
+            CustomButton(
+              onTap: () => context.read<CalculatorController>().addNumber('4'),
+              buttonText: ('4'),
+            ),
+            CustomButton(
+              onTap: () => context.read<CalculatorController>().addNumber('5'),
+              buttonText: ('5'),
+            ),
+            CustomButton(
+              onTap: () => context.read<CalculatorController>().addNumber('6'),
+              buttonText: ('6'),
+            ),
+            CustomButton(
+              onTap: () => context.read<CalculatorController>().subtract(),
+              buttonText: ('-'),
+              customStyle: operatorButtonStyle,
+            ),
           ],
         ),
-        Row(
+        ButtonRow(
           children: [
-            ElevatedButton(
-                onPressed: () =>
-                    context.read<CalculatorController>().addDecimal(),
-                child: const Text('.')),
-            ElevatedButton(
-                onPressed: () =>
-                    context.read<CalculatorController>().addNumber('0'),
-                child: const Text('0')),
-            ElevatedButton(
-                onPressed: () =>
-                    context.read<CalculatorController>().delete(),
-                child: const Text('DEL')),
-            ElevatedButton(
-                onPressed: () =>
-                    context.read<CalculatorController>().calculate(),
-                child: const Text('='))
+            CustomButton(
+              onTap: () => context.read<CalculatorController>().addNumber('1'),
+              buttonText: ('1'),
+            ),
+            CustomButton(
+              onTap: () => context.read<CalculatorController>().addNumber('2'),
+              buttonText: ('2'),
+            ),
+            CustomButton(
+              onTap: () => context.read<CalculatorController>().addNumber('3'),
+              buttonText: ('3'),
+            ),
+            CustomButton(
+              onTap: () => context.read<CalculatorController>().add(),
+              buttonText: ('+'),
+              customStyle: operatorButtonStyle,
+            ),
           ],
-        )
+        ),
+        ButtonRow(
+          children: [
+            CustomButton(
+              onTap: () => context.read<CalculatorController>().addDecimal(),
+              buttonText: ('.'),
+            ),
+            CustomButton(
+              onTap: () => context.read<CalculatorController>().addNumber('0'),
+              buttonText: ('0'),
+            ),
+            CustomButton(
+              onTap: () => context.read<CalculatorController>().delete(),
+              buttonText: ('DEL'),
+            ),
+            CustomButton(
+              onTap: () => context.read<CalculatorController>().calculate(),
+              buttonText: ('='),
+              customStyle: equalButtonStyle,
+            )
+          ],
+        ),
       ]),
+    );
+  }
+}
+
+class ButtonRow extends StatelessWidget {
+  const ButtonRow({super.key, required this.children});
+
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: children,
+      ),
     );
   }
 }

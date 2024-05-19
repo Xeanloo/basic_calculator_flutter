@@ -19,7 +19,7 @@ class MainApp extends StatelessWidget {
       ),
       home: BlocProvider(
         create: (_) => CalculatorController(),
-        child: CalculatorView(),
+        child: const CalculatorView(),
       ),
     );
   }
